@@ -7,14 +7,15 @@
     <title>图片幻灯片</title>
     <style>
         #imageContainer {
-            max-width: 50%;
+            max-width: 100%;
             overflow: hidden;
         }
+
         #slideshow {
             display: flex;
-            transition: transform 0.5 ease-in-out;
+            transition: transform 0.5s ease-in-out;
         }
-        
+
         .slide {
             flex: 0 0 100%;
             box-sizing: border-box;
@@ -22,33 +23,48 @@
     </style>
 </head>
 <body>
-    <div id="imageContainer">
-        <div id="slideshow"></div>
+
+<!-- 创建一个容器来显示图片 -->
+<div id="imageContainer">
+    <!-- 幻灯片容器 -->
+    <div id="slideshow">
+        <!-- 使用JavaScript动态添加幻灯片 -->
     </div>
-    <script>
-        var imageDirectory = "/images/";
-        var imageFiles = ["1.jpg","2.jpg","3.jpg","4.jpg"];
-        var slideshowContainer= document.getElimentById("slideshow");
+</div>
 
-        imageFiles.forEach(function(imageFile) {
-            var slide=document.createElement("div");
-            slide.className="slide";
+<!-- 引入JavaScript代码 -->
+<script>
+    // 图片目录路径
+    var imageDirectory = "/images/";
 
-            var imgElement=document.createElement("img");
-            imgElement.src=imageDirectory+imageFile;
-            
-            slide.appendChild(imgElement);
-            slideshowContainer.appendChild(slide);
-        });
+    // 图片文件名数组
+    var imageFiles = ["1.jpg","2.jpg", "3.jpg"];
 
-        var currentIndex=0;
+    // 创建幻灯片容器
+    var slideshowContainer = document.getElementById("slideshow");
 
-        function showSlide(index){
-            var offset=-index*100+"%";
-            slideshowContainer.style.transform="translateX("+offset+")";
-        }
+    // 动态添加幻灯片
+    imageFiles.forEach(function (imageFile) {
+        var slide = document.createElement("div");
+        slide.className = "slide";
 
-        function nextSlide() {
+        var imgElement = document.createElement("img");
+        imgElement.src = imageDirectory + imageFile;
+        imgElement.alt = "IMG";
+
+        slide.appendChild(imgElement);
+        slideshowContainer.appendChild(slide);
+    });
+
+    // JavaScript代码以实现幻灯片效果
+    var currentIndex = 0;
+
+    function showSlide(index) {
+        var offset = -index * 100 + "%";
+        slideshowContainer.style.transform = "translateX(" + offset + ")";
+    }
+
+    function nextSlide() {
         currentIndex = (currentIndex + 1) % imageFiles.length;
         showSlide(currentIndex);
     }
@@ -65,5 +81,5 @@
     setInterval(nextSlide, 5000);
 </script>
 
-    </body>
-    </html>
+</body>
+</html>
