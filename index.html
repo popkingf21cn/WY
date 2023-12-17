@@ -4,23 +4,66 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>显示OneDrive图片</title>
+    <title>图片幻灯片</title>
+    <style>
+        #imageContainer {
+            max-width: 50%;
+            overflow: hidden;
+        }
+        #slideshow {
+            display: flex;
+            transition: transform 0.5 ease-in-out;
+        }
+        
+        .slide {
+            flex: 0 0 100%;
+            box-sizing: border-box;
+        }
+    </style>
 </head>
 <body>
-    <div id="imageContainer"></div>
+    <div id="imageContainer">
+        <div id="slideshow"></div>
+    </div>
     <script>
-        // OneDrive中图片的公开链接
-        var oneDriveImageUrl = "/20220902184955.jpg";
-    
-        // 使用JavaScript创建一个img元素
-        var imgElement = document.createElement("img");
-    
-        // 设置img元素的src属性为OneDrive图片链接
-        imgElement.src = oneDriveImageUrl;
-    
-        // 将img元素添加到页面上的容器中
-        document.getElementById("imageContainer").appendChild(imgElement);
-    </script>
-    
+        var imageDirectory = "/images/";
+        var imageFiles = ["1.jpg","2.jpg","3.jpg","4.jpg"];
+        var slideshowContainer= document.getElimentById("slideshow");
+
+        imageFiles.forEach(function(imageFile) {
+            var slide=document.createElement("div");
+            slide.className="slide";
+
+            var imgElement=document.createElement("img");
+            imgElement.src=imageDirectory+imgFile;
+            
+            slide.appendChild(imgElement);
+            slideshowContainer.appendChild(slide);
+        });
+
+        var currentIndex=0;
+
+        function showSlide(index){
+            var offset=-index*100+"%";
+            slideshowContainer.style.transform="translateX("+offset+")";
+        }
+
+        function nextSlide() {
+        currentIndex = (currentIndex + 1) % imageFiles.length;
+        showSlide(currentIndex);
+    }
+
+    function prevSlide() {
+        currentIndex = (currentIndex - 1 + imageFiles.length) % imageFiles.length;
+        showSlide(currentIndex);
+    }
+
+    // 初始显示第一张幻灯片
+    showSlide(currentIndex);
+
+    // 定时切换到下一张幻灯片（例如，每5秒切换一次）
+    setInterval(nextSlide, 5000);
+</script>
+
     </body>
     </html>
