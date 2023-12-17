@@ -3,3 +3,30 @@
 <p><a href="https://www.google.com">Fan's 网站开发中，欢迎关注！</a>
 <img src="20220902184955.jpg" width="304" height="228" align="center">
 </html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示OneDrive图片</title>
+</head>
+<body>
+    <div id="imageContainer"></div>
+    <script>
+        // OneDrive中图片的公开链接
+        var oneDriveImageUrl = "https://onedrive.live.com/?cid=1FB4971A5120708A&id=1FB4971A5120708A%211782&parId=1FB4971A5120708A%21211&o=OneUp";
+    
+        // 使用JavaScript创建一个img元素
+        var imgElement = document.createElement("img");
+    
+        // 设置img元素的src属性为OneDrive图片链接
+        imgElement.src = oneDriveImageUrl;
+    
+        // 将img元素添加到页面上的容器中
+        document.getElementById("imageContainer").appendChild(imgElement);
+    </script>
+    
+    </body>
+    </html>
